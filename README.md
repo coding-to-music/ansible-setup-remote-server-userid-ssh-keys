@@ -71,6 +71,18 @@ We will install python and ansible on the ansible 'control machine' by running t
 sudo apt install python ansible -y
 ```
 
+Output
+
+```java
+Package python is not available, but is referred to by another package.
+This may mean that the package is missing, has been obsoleted, or
+is only available from another source
+However the following packages replace it:
+  2to3 python2-minimal:i386 python2:i386 python2-minimal python2 dh-python python-is-python3
+
+E: Package 'python' has no installation candidate
+```
+
 ## Setup Ansible Control Machine
 
 After the installation is complete, we will add a new system user.
@@ -80,14 +92,15 @@ We will add a new user named 'provision' in order to perform server provisioning
 Add new user 'provision' and give the user a password.
 
 ```java
-useradd -m -s /bin/bash provision
-passwd provision
+sudo useradd -m -s /bin/bash provision
+
+sudo passwd provision
 ```
 
 Now add the 'provision' user for sudo without the password by creating new configuration file under the `/etc/sudoers.d/`` using the command below.
 
 ```java
-echo  -e 'provision\tALL=(ALL)\tNOPASSWD:\tALL' > /etc/sudoers.d/provision
+sudo echo  -e 'provision\tALL=(ALL)\tNOPASSWD:\tALL' > /etc/sudoers.d/provision
 ```
 
 A new user has been created, and now it can use sudo without a password.
@@ -95,6 +108,13 @@ A new user has been created, and now it can use sudo without a password.
 ## Add user
 
 ## Step 2 - Define User and SSH Key
+
+Make sure the 'whois' package is installed on the system, or you can install using the following command.
+
+```java
+sudo apt install whois -y
+```
+
 In this step, we will define the user for ansible hosts. This user will be automatically created by ansible, so we just need to define the username, password, and the ssh public key.
 
 For each server ('ansi01' and 'ansi02'), we will create a new user named 'provision' with password 'secret01'. And we need to encrypt the 'secret01' password using the mkpasswd command.
@@ -107,16 +127,9 @@ mkpasswd --method=SHA-512
 # TYPE THE PASSWORD 'secret01'
 ```
 
-Note:
-
-Make sure the 'whois' package is installed on the system, or you can install using the following command.
-
-```java
-sudo apt install whois -y
-```
 And you will get the SHA-512 encrypted password.
 
-Define User and SSH Key
+## Define User and SSH Key
 
 Next, we will generate a new ssh-key.
 
@@ -126,6 +139,7 @@ Login to the 'provision' user and generate the ssh key using the ssh-keygen comm
 su - provision
 ssh-keygen -t rsa
 ```
+
 Now the user and password have been defined, and the ssh key has been created l(ocated at the '.ssh' directory).
 
 user and password have been defined

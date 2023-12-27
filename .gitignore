@@ -1,2 +1,5 @@
 .env
 hosts
+deploy-ssh.yml
+inventory.ini
+ansible01/
