@@ -1,0 +1,13 @@
+{
+  "name": "ansible-setup-remote-server-userid-ssh-keys",
+  "version": "1.0.0",
+  "description": "Setup New User and SSH Key Auth on remote servers using Ansible on Ubuntu",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "git add . && git commit -m Build && git push",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
