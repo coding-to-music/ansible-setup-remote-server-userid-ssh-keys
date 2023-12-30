@@ -42,8 +42,8 @@ Grant the user sudo permissions and set a password:
 
 ```java
 
-# this did not work. Not sure what wheel is
-sudo usermod -aG sudo anscfg
+# add the new user to the group of Docker, which allows sudo without having to say sudo on every command
+sudo usermod -aG docker anscfg
 
 sudo passwd anscfg
 ```
@@ -218,7 +218,7 @@ chmod 644 /home/anscfg/playbooks/useradd.yml
 Now you can run your playbook:
 
 ```java
-ansible-playbook useradd.yml -u remote_user --ask-pass
+ansible-playbook /home/anscfg/playbooks/useradd.yml -u remote_user --ask-pass
 ```
 
 After running the playbook on remote hosts, you can SSH into them without a password (using the private key):
