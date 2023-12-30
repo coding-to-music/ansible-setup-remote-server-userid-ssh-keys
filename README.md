@@ -178,7 +178,7 @@ nano /home/anscfg/playbooks/useradd.yml
       name: anscfg
       password: set user password hash here. Ansible will not let you pass the password in clear text. Get your password hash with python (see the command below).
       shell: /bin/bash
-      groups: sudo
+      groups: docker
       append: yes
 
   - name: Create an ssh key for anscfg user in ~anscfg/.ssh/id_rsa
